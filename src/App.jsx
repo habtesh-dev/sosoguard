@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Shield, Zap, TrendingUp, AlertTriangle, CheckCircle2, Wallet, Bell, Terminal, ChevronRight, Activity, Users, DollarSign, History, ChevronUp, Twitter, MessageCircle, Send, Cpu } from 'lucide-react';
+import { Search, Shield, Zap, TrendingUp, AlertTriangle, CheckCircle2, Wallet, Bell, Terminal, ChevronRight, Activity, Users, DollarSign, History, ChevronUp, X, MessageCircle, Send, Cpu } from 'lucide-react';
 
 const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -29,8 +29,8 @@ const App = () => {
     const interval = setInterval(() => {
       if (step < logs.length) {
         setTerminalLogs(prev => {
-          const newLog = logs[step];
-          return [...prev, newLog];
+          const nextLog = logs[step];
+          return nextLog ? [...prev, nextLog] : prev;
         });
         step++;
       }
@@ -47,11 +47,11 @@ const App = () => {
         logic: "High social sentiment detected on X. SoSoValue smart money index shows accumulation. Risk/Reward ratio is optimal for short-term entry.",
         price: "$0.000452",
         sentiment: "Extreme Greed",
-        sentimentScore: 88, // For the meter (0-100)
+        sentimentScore: 88, 
         smartMoney: "+$2.5M",
         socialMentions: "+420%"
       });
-    }, 3000);
+    }, 3500);
   };
 
   const scrollToTop = () => {
@@ -97,7 +97,7 @@ const App = () => {
             {/* Links and Buttons */}
             <div className="flex items-center space-x-6 pr-2">
               <div className="hidden md:flex items-center space-x-5 text-sm text-neutral-400 font-medium">
-                <a href="https://x.com/PunnyCrypto" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><Twitter className="w-4 h-4 hover:text-white cursor-pointer transition-colors" /></a>
+                <a href="https://x.com/PunnyCrypto" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><X className="w-4 h-4 hover:text-white cursor-pointer transition-colors" /></a>
                 <a href="https://t.me/habtamu56" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><MessageCircle className="w-4 h-4 hover:text-white cursor-pointer transition-colors" /></a>
                 <a href="mailto:cryptomaster758@gmail.com" aria-label="Email"><Send className="w-4 h-4 hover:text-white cursor-pointer transition-colors" /></a>
                 <span className="hover:text-white cursor-pointer transition-colors ml-2">Terminal</span>
@@ -194,9 +194,9 @@ const App = () => {
             </div>
           )}
 
-          {/* FEATURE 1: Live AI Terminal (Replaces simple loading spinner) */}
+          {/* FEATURE 1: Live AI Terminal */}
           {analyzing && (
-            <div className="max-w-2xl mx-auto bg-black/90 border border-neutral-800 rounded-2xl p-1 overflow-hidden shadow-2xl shadow-orange-500/10 animate-in zoom-in-95 duration-300 relative z-20">
+            <div className="max-w-2xl mx-auto bg-black/90 border border-neutral-800 rounded-2xl p-1 overflow-hidden shadow-2xl relative z-20">
               <div className="bg-neutral-900 px-4 py-2 flex items-center space-x-2 border-b border-neutral-800 rounded-t-xl">
                 <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
                 <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
@@ -207,7 +207,6 @@ const App = () => {
               <div className="p-6 font-mono text-sm h-64 overflow-y-auto flex flex-col justify-end">
                 <div className="space-y-3">
                   {terminalLogs.map((log, i) => {
-                     // Safe check
                      const isSuccess = typeof log === 'string' && log.includes('[Success]');
                      return (
                       <div key={i} className="flex items-start animate-in fade-in slide-in-from-bottom-2 duration-300">
@@ -225,7 +224,7 @@ const App = () => {
             </div>
           )}
 
-          {/* FEATURE 3: Live Agent Activity (Shows when idle) */}
+          {/* FEATURE 3: Live Agent Activity */}
           {!result && !analyzing && (
             <div className="max-w-2xl mx-auto mt-16 text-left animate-in fade-in duration-1000 delay-300">
               <div className="flex items-center justify-between mb-4 px-2">
@@ -237,7 +236,6 @@ const App = () => {
               </div>
               
               <div className="space-y-3 relative">
-                {/* Fade effect at bottom */}
                 <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black to-transparent pointer-events-none z-10"></div>
                 
                 {[
@@ -260,20 +258,14 @@ const App = () => {
           {/* Results Area */}
           {result && !analyzing && (
             <div className="max-w-5xl mx-auto animate-in slide-in-from-bottom-8 zoom-in-95 duration-500">
-              
-              {/* Back button */}
               <button onClick={() => setResult(null)} className="flex items-center space-x-2 text-neutral-500 hover:text-white mb-6 transition-colors text-sm font-medium">
                 <ChevronRight className="w-4 h-4 rotate-180" />
                 <span>Back to Search</span>
               </button>
 
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                
-                {/* Left: AI Signal & Insights */}
                 <div className="lg:col-span-2 space-y-6">
                   <div className="bg-[#0a0a0a]/80 backdrop-blur-md border border-neutral-800 rounded-3xl p-6 relative overflow-hidden group hover:border-green-500/30 transition-colors shadow-xl">
-                    <div className="absolute top-0 right-0 w-40 h-40 bg-green-500/10 rounded-full blur-3xl -mr-10 -mt-10"></div>
-                    
                     <div className="flex justify-between items-start mb-6 relative z-10">
                       <div>
                         <div className="flex items-center space-x-2 mb-2">
@@ -313,36 +305,30 @@ const App = () => {
                   </div>
 
                   <div className="grid grid-cols-3 gap-4">
-                    {/* FEATURE 2: Fear & Greed Meter */}
                     <div className="bg-[#0a0a0a]/80 backdrop-blur-sm border border-neutral-800 rounded-2xl p-4 relative overflow-hidden flex flex-col justify-between">
                       <div className="flex justify-center mb-3">
                          <TrendingUp className="w-5 h-5 text-neutral-400" />
                       </div>
                       <p className="text-xs text-neutral-500 mb-2 text-center font-medium">Market Sentiment</p>
-                      
                       <div className="w-full mt-1 mb-2">
                         <div className="h-2 w-full bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 rounded-full relative">
-                          {/* Indicator Marker */}
                           <div 
                             className="absolute top-[-4px] bottom-[-4px] w-1.5 bg-white shadow-md rounded-full border border-neutral-200"
                             style={{ left: `${result.sentimentScore}%` }}
                           ></div>
                         </div>
                         <div className="flex justify-between text-[10px] text-neutral-600 mt-1 uppercase font-bold tracking-wider">
-                          <span>Fear</span>
-                          <span>Greed</span>
+                          <span>Fear</span><span>Greed</span>
                         </div>
                       </div>
-                      <p className="text-red-400 font-bold text-center text-sm">{result.sentiment} ({result.sentimentScore})</p>
+                      <p className="text-red-400 font-bold text-center text-sm">{result.sentiment}</p>
                     </div>
-                    
-                    <div className="bg-[#0a0a0a]/80 backdrop-blur-sm border border-neutral-800 rounded-2xl p-4 text-center flex flex-col justify-center">
+                    <div className="bg-[#0a0a0a]/80 border border-neutral-800 rounded-2xl p-4 text-center flex flex-col justify-center">
                       <DollarSign className="w-5 h-5 text-neutral-400 mx-auto mb-2" />
                       <p className="text-xs text-neutral-500 mb-1">Smart Money (24h)</p>
                       <p className="text-green-400 font-bold text-lg">{result.smartMoney}</p>
                     </div>
-                    
-                    <div className="bg-[#0a0a0a]/80 backdrop-blur-sm border border-neutral-800 rounded-2xl p-4 text-center flex flex-col justify-center">
+                    <div className="bg-[#0a0a0a]/80 border border-neutral-800 rounded-2xl p-4 text-center flex flex-col justify-center">
                       <Users className="w-5 h-5 text-neutral-400 mx-auto mb-2" />
                       <p className="text-xs text-neutral-500 mb-1">Social Mentions</p>
                       <p className="text-green-400 font-bold text-lg">{result.socialMentions}</p>
@@ -350,10 +336,8 @@ const App = () => {
                   </div>
                 </div>
 
-                {/* Right: The Stoic Exit Setup */}
                 <div className="bg-[#0a0a0a]/90 backdrop-blur-md border border-neutral-800 rounded-3xl p-6 relative overflow-hidden shadow-xl flex flex-col h-full">
                   <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#f95700] to-orange-400"></div>
-                  
                   <div className="flex justify-between items-start mb-6 mt-2">
                     <div>
                       <div className="flex items-center space-x-2 mb-1">
@@ -363,72 +347,41 @@ const App = () => {
                       <h2 className="text-2xl font-bold text-white tracking-tight">Capital Guard</h2>
                     </div>
                   </div>
-
-                  <p className="text-sm text-neutral-400 mb-8 leading-relaxed">
-                    Auto-extract your initial seed capital when targets hit. Trade with house money, zero emotions.
-                  </p>
-
+                  <p className="text-sm text-neutral-400 mb-8 leading-relaxed">Auto-extract your initial seed capital when targets hit. Trade with house money, zero emotions.</p>
                   <div className="space-y-5 flex-grow">
                     <div className="bg-black/60 p-4 rounded-2xl border border-neutral-800/80 hover:border-neutral-700 transition-colors focus-within:border-orange-500/50">
                       <label className="text-xs text-neutral-500 uppercase tracking-wider font-bold mb-3 flex items-center justify-between">
-                        <span>Seed Capital</span>
-                        <span className="text-neutral-600">USDC</span>
+                        <span>Seed Capital</span><span className="text-neutral-600">USDC</span>
                       </label>
                       <div className="relative">
                         <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 font-medium">$</span>
-                        <input type="number" defaultValue="100" className="w-full bg-[#0a0a0a] border border-neutral-800 rounded-xl py-3 pl-8 pr-4 text-white text-lg focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-all font-mono" />
+                        <input type="number" defaultValue="100" className="w-full bg-[#0a0a0a] border border-neutral-800 rounded-xl py-3 pl-8 pr-4 text-white text-lg focus:outline-none focus:border-orange-500 transition-all font-mono" />
                       </div>
                     </div>
-                    
                     <div className="bg-black/60 p-4 rounded-2xl border border-neutral-800/80 hover:border-neutral-700 transition-colors">
                       <label className="text-xs text-neutral-500 uppercase tracking-wider font-bold mb-3 flex items-center justify-between">
-                        <span>Exit Trigger</span>
-                        <span className="text-neutral-600">Auto-Sell</span>
+                        <span>Exit Trigger</span><span className="text-neutral-600">Auto-Sell</span>
                       </label>
                       <div className="relative">
-                        <select className="w-full bg-[#0a0a0a] border border-neutral-800 rounded-xl py-3 pl-4 pr-10 text-white text-md focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 appearance-none transition-all cursor-pointer font-medium">
-                          <option>2x (100% Profit)</option>
-                          <option>3x (200% Profit)</option>
-                          <option>5x (400% Profit)</option>
-                          <option>Sentiment Drop (SoSoValue Alert)</option>
+                        <select className="w-full bg-[#0a0a0a] border border-neutral-800 rounded-xl py-3 pl-4 pr-10 text-white focus:outline-none focus:border-orange-500 appearance-none transition-all cursor-pointer font-medium">
+                          <option>2x (100% Profit)</option><option>3x (200% Profit)</option><option>5x (400% Profit)</option><option>Sentiment Drop</option>
                         </select>
                         <ChevronRight className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 rotate-90 pointer-events-none" />
                       </div>
                     </div>
                   </div>
-
-                  <button 
-                    onClick={() => setCapitalProtected(!capitalProtected)}
-                    className={`w-full mt-8 py-4 rounded-xl font-bold text-lg flex items-center justify-center space-x-2 transition-all duration-300 ${
-                      capitalProtected 
-                      ? 'bg-green-500/10 text-green-400 border border-green-500/50 shadow-[0_0_20px_rgba(34,197,94,0.1)]' 
-                      : 'bg-[#f95700] hover:bg-orange-600 text-white shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:-translate-y-0.5'
-                    }`}
-                  >
-                    {capitalProtected ? (
-                      <>
-                        <CheckCircle2 className="w-5 h-5" />
-                        <span>Guard Activated</span>
-                      </>
-                    ) : (
-                      <>
-                        <Shield className="w-5 h-5" />
-                        <span>Activate Guard & Execute</span>
-                      </>
-                    )}
+                  <button onClick={() => setCapitalProtected(!capitalProtected)} className={`w-full mt-8 py-4 rounded-xl font-bold text-lg flex items-center justify-center space-x-2 transition-all duration-300 ${capitalProtected ? 'bg-green-500/10 text-green-400 border border-green-500/50 shadow-[0_0_20px_rgba(34,197,94,0.1)]' : 'bg-[#f95700] hover:bg-orange-600 text-white shadow-lg shadow-orange-500/25'}`}>
+                    {capitalProtected ? <><CheckCircle2 className="w-5 h-5" /><span>Guard Activated</span></> : <><Shield className="w-5 h-5" /><span>Activate Guard & Execute</span></>}
                   </button>
                 </div>
               </div>
             </div>
           )}
-
         </main>
 
         {/* Footer */}
         <footer className="relative z-10 mt-20 pt-16 pb-8 border-t border-neutral-900/50 bg-black/40 backdrop-blur-sm">
           <div className="max-w-6xl mx-auto px-4">
-            
-            {/* Powered By Sponsors */}
             <div className="flex flex-col items-center justify-center mb-20">
               <p className="text-sm font-bold text-neutral-500 uppercase tracking-widest mb-6">Powered By</p>
               <div className="flex flex-wrap justify-center items-center gap-x-16 gap-y-8 opacity-70 hover:opacity-100 transition-all duration-500">
@@ -437,38 +390,28 @@ const App = () => {
               </div>
             </div>
 
-            {/* Back to Top */}
-            <div 
-              onClick={scrollToTop}
-              className="flex flex-col items-center justify-center cursor-pointer opacity-50 hover:opacity-100 hover:text-orange-500 transition-all mb-16"
-            >
+            <div onClick={scrollToTop} className="flex flex-col items-center justify-center cursor-pointer opacity-50 hover:opacity-100 hover:text-orange-500 transition-all mb-16">
               <div className="flex flex-col -space-y-3 mb-2 animate-bounce">
-                <ChevronUp className="w-6 h-6" />
-                <ChevronUp className="w-6 h-6" />
+                <ChevronUp className="w-6 h-6" /><ChevronUp className="w-6 h-6" />
               </div>
               <span className="text-xs uppercase tracking-widest font-semibold">Back to Top</span>
             </div>
 
-            {/* Bottom Links */}
             <div className="flex flex-col md:flex-row justify-between items-center text-xs text-neutral-500 font-medium">
-              <div className="mb-4 md:mb-0 hover:text-white cursor-pointer transition-colors">
-                WhitePaper
-              </div>
+              <div className="mb-4 md:mb-0 hover:text-white cursor-pointer transition-colors">WhitePaper</div>
               <div className="flex flex-wrap justify-center items-center gap-6">
                 <span className="hover:text-white cursor-pointer transition-colors">Terms of Service</span>
                 <span className="hover:text-white cursor-pointer transition-colors">Privacy Policy</span>
                 <span className="hover:text-white cursor-pointer transition-colors">About SoSoGuard</span>
                 <div className="flex items-center space-x-4 ml-4">
-                  <a href="https://x.com/PunnyCrypto" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><Twitter className="w-4 h-4 hover:text-white cursor-pointer transition-colors" /></a>
-                  <a href="https://t.me/habtamu56" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><MessageCircle className="w-4 h-4 hover:text-white cursor-pointer transition-colors" /></a>
-                  <a href="mailto:cryptomaster758@gmail.com" aria-label="Email"><Send className="w-4 h-4 hover:text-white cursor-pointer transition-colors" /></a>
+                  <a href="https://x.com/PunnyCrypto" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><X className="w-4 h-4 hover:text-white transition-colors" /></a>
+                  <a href="https://t.me/habtamu56" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><MessageCircle className="w-4 h-4 hover:text-white transition-colors" /></a>
+                  <a href="mailto:cryptomaster758@gmail.com" aria-label="Email"><Send className="w-4 h-4 hover:text-white transition-colors" /></a>
                 </div>
               </div>
             </div>
-
           </div>
         </footer>
-
       </div>
     </div>
   );
