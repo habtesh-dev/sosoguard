@@ -16,14 +16,14 @@ const App = () => {
     
     setAnalyzing(true);
     setResult(null);
-    setTerminalLogs(['[System] Initializing SoSoGuard Agent...']);
+    setTerminalLogs([{ text: '[System] Initializing SoSoGuard Agent...', isSuccess: false }]);
     
     const logs = [
-      '[Data] Fetching SoSoValue Smart Money flows...',
-      '[Network] Scanning X (Twitter) & Telegram sentiment...',
-      '[Analysis] Correlating on-chain buys with social spikes...',
-      '[Action] Calculating optimal risk/reward & Stoic exit...',
-      '[Success] Market Signal generated successfully.'
+      { text: '[Data] Fetching SoSoValue Smart Money flows...', isSuccess: false },
+      { text: '[Network] Scanning X (Twitter) & Telegram sentiment...', isSuccess: false },
+      { text: '[Analysis] Correlating on-chain buys with social spikes...', isSuccess: false },
+      { text: '[Action] Calculating optimal risk/reward & Stoic exit...', isSuccess: false },
+      { text: '[Success] Market Signal generated successfully.', isSuccess: true }
     ];
     
     let step = 0;
@@ -199,11 +199,11 @@ const App = () => {
               <div className="p-6 font-mono text-sm h-64 overflow-y-auto flex flex-col justify-end">
                 <div className="space-y-3">
                   {terminalLogs.map((log, i) => {
-                     const isSuccess = typeof log === 'string' && log.includes('[Success]');
+                     const { text, isSuccess } = log;
                      return (
                       <div key={i} className="flex items-start animate-in fade-in slide-in-from-bottom-2 duration-300">
                         <span className="text-orange-500 mr-3">►</span>
-                        <span className={isSuccess ? 'text-green-400 font-bold' : 'text-neutral-300'}>{log}</span>
+                        <span className={isSuccess ? 'text-green-400 font-bold' : 'text-neutral-300'}>{text}</span>
                       </div>
                     )
                   })}
