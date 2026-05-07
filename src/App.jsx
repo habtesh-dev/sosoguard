@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Shield, Zap, TrendingUp, AlertTriangle, CheckCircle2, Wallet, Bell, Terminal, ChevronRight, Activity, Users, DollarSign, History, ChevronUp, X, Mail, Send, Cpu } from 'lucide-react';
+import { Search, Shield, Zap, TrendingUp, CheckCircle2, Wallet, Terminal, ChevronRight, Users, DollarSign, ChevronUp, X, Mail, Send, Cpu } from 'lucide-react';
 
 // Idhu SoSoGuard AI Agent mukhya component (Main App Component)
 const App = () => {
